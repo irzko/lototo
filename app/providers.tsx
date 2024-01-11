@@ -1,7 +1,7 @@
 "use client";
 import LottoContext from "@/context/LottoContext";
 import TicketContext from "@/context/TicketContext";
-import React from "react";
+import React, { useEffect } from "react";
 
 export default function Providers({ children }: { children: React.ReactNode }) {
   const [currentLotto, setCurrentLotto] = React.useState<{
@@ -13,6 +13,10 @@ export default function Providers({ children }: { children: React.ReactNode }) {
   });
 
   const [selectedTickets, setSelectedTickets] = React.useState<Ticket[]>([]);
+  useEffect(() => {
+    const localStorage = window.localStorage.getItem("selectedTickets");
+    localStorage && setSelectedTickets(JSON.parse(localStorage));
+  }, []);
 
   return (
     <LottoContext.Provider value={[currentLotto, setCurrentLotto]}>

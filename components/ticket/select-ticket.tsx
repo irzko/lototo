@@ -94,8 +94,8 @@ const SelectTicket = () => {
           ))}
         </div>
         <div className="flex justify-between bg-gray-200 rounded-lg p-0.5">
-          <TabType title="Trang 1" id="type-1" value="1" />
-          <TabType title="Trang 2" id="type-2" value="2" />
+          <TabType title="#1" id="type-1" value="1" />
+          <TabType title="#2" id="type-2" value="2" />
         </div>
       </div>
     </div>

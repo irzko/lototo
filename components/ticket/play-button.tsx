@@ -6,7 +6,7 @@ import React, { useContext } from "react";
 const PlayButton = () => {
   const [selectedTickets] = useContext(TicketContext);
   return (
-    <Link href="/lotto/play" className="rounded-full shadow-sm border px-4 py-2">
+    <Link href="/lotto/play" className="rounded-full text-sky-900 font-semibold shadow-sm border px-4 py-2">
       Dò ({selectedTickets.length})
     </Link>
   );

@@ -12,7 +12,7 @@ import PlayButton from "@/components/ticket/play-button";
 
 const ticketButton = tv({
   extend: colorBase,
-  base: "text-white py-2 px-4 rounded-full shadow-sm border disabled:opacity-50 disabled:cursor-not-allowed transition",
+  base: "text-white py-2 px-4 rounded-full shadow-sm font-semibold disabled:opacity-50 disabled:cursor-not-allowed transition",
 });
 
 export default function Page() {
@@ -40,6 +40,22 @@ export default function Page() {
     );
   }
 
+  const handleSelectTicket = () => {
+    if (selectedTickets.length <= 1) {
+      setSelectedTickets((prev) => {
+        const newSelectedTickets = [...prev];
+        newSelectedTickets.push(ticket);
+        localStorage.setItem(
+          "selectedTickets",
+          JSON.stringify(newSelectedTickets)
+        );
+        return newSelectedTickets;
+      });
+    } else {
+      alert("Chỉ được chọn tối đa 2 vé, nhắm dò kịp hông?");
+    }
+  };
+
   return (
     <div
       className={`w-full p-2 flex flex-col justify-center space-y-4 items-center`}
@@ -52,9 +68,11 @@ export default function Page() {
         <button
           disabled={selectedTickets.some((t) => t.id === ticket.id)}
           className={ticketButton({ color: ticket.color })}
-          onClick={() => setSelectedTickets((prev) => [...prev, ticket])}
+          onClick={handleSelectTicket}
         >
-          {selectedTickets.some((t) => t.id === ticket.id) ? "Đã chọn" : "Chọn"}
+          {selectedTickets.some((t) => t.id === ticket.id)
+            ? "Đã chọn"
+            : "Chọn vé"}
         </button>
         <PlayButton />
       </div>

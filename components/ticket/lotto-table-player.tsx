@@ -5,7 +5,7 @@ import { tv } from "tailwind-variants";
 
 const ticketButton = tv({
   extend: colorBase,
-  base: "text-white py-1 px-2 rounded-full shadow-sm disabled:opacity-50 disabled:cursor-not-allowed transition",
+  base: "text-white py-1 px-2 rounded-full font-semibold shadow-sm disabled:opacity-50 disabled:cursor-not-allowed transition",
 });
 
 export default function LottoTablePlayer({ ticket }: { ticket: Ticket }) {
@@ -61,7 +61,7 @@ export default function LottoTablePlayer({ ticket }: { ticket: Ticket }) {
               setBoardState(newBoardState);
             }}
           >
-            Reset
+            Đặt lại
           </button>
         </div>
         <div className="grid grid-cols-9 gap-1">

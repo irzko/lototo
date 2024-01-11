@@ -31,8 +31,8 @@ export default function Page() {
       ></div>
       <Swiper
         slidesPerView={1}
-        onSlideChange={() => console.log("slide change")}
-        onSwiper={(swiper) => console.log(swiper)}
+        // onSlideChange={() => console.log("slide change")}
+        // onSwiper={(swiper) => console.log(swiper)}
       >
         {selectedTickets.map((ticket, index) => (
           <SwiperSlide key={index}>

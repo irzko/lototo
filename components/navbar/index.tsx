@@ -11,7 +11,7 @@ export default function NavBar({ children }: { children?: React.ReactNode }) {
           <div className="h-full flex items-center">
             <Link
               href="/"
-              className={`${lobster.className} font-bold text-2xl`}
+              className={`${lobster.className} text-sky-900 font-bold text-2xl`}
             >
               Lôtôtô
             </Link>
