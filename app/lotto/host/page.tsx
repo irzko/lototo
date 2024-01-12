@@ -59,9 +59,30 @@ export default function Page() {
       <div className="max-w-md flex flex-col items-center space-y-2 w-full mb-20">
         <div className="p-2 w-full sticky z-40 border-b shadow-sm top-16 bg-white">
           <div className="rounded-2xl flex justify-center items-center border">
-            <h1 className="text-8xl font-black text-sky-900">{value}</h1>
+            <h1 className="text-9xl font-black text-sky-900">{value}</h1>
           </div>
         </div>
+        <div className="shadow-sm border rounded-2xl w-full">
+          <div className="flex justify-between items-center border-b p-2">
+            <h3 className="font-semibold text-sky-900">Kết quả</h3>
+            <button
+              onClick={handleReset}
+              className="bg-sky-900 text-white font-semibold rounded-full px-2 py-1"
+            >
+              Đặt lại
+            </button>
+          </div>
+          <div className="grid grid-cols-10 p-2 w-full gap-0.5">
+            {Array.from({ length: 90 }, (_, i) => i + 1).map((number) => (
+              <CellResult
+                key={number}
+                value={number}
+                isChecked={result.includes(number)}
+              />
+            ))}
+          </div>
+        </div>
+        <hr className="h-[1px] w-full" />
         <div className="p-2 w-full">
           {selectedTickets.length > 0 ? (
             <div className="w-full">
@@ -93,26 +114,6 @@ export default function Page() {
               </Link>
             </div>
           )}
-        </div>
-        <div className="shadow-sm border rounded-2xl w-full">
-          <div className="flex justify-between items-center border-b p-2">
-            <h3 className="font-semibold text-sky-900">Kết quả</h3>
-            <button
-              onClick={handleReset}
-              className="bg-sky-900 text-white font-semibold rounded-full px-2 py-1"
-            >
-              Đặt lại
-            </button>
-          </div>
-          <div className="grid grid-cols-10 p-2 w-full gap-0.5">
-            {Array.from({ length: 90 }, (_, i) => i + 1).map((number) => (
-              <CellResult
-                key={number}
-                value={number}
-                isChecked={result.includes(number)}
-              />
-            ))}
-          </div>
         </div>
       </div>
       <div className="fixed bottom-0 z-40 h-16 bg-white inset-x-0 flex justify-center">
