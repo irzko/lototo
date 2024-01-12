@@ -5,6 +5,8 @@ import getRandomNumber from "@/lib/getRandomNumber";
 import React, { useContext } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
+import { Pagination } from "swiper/modules";
+import "swiper/css/pagination";
 import LottoTablePlayer from "@/components/ticket/lotto-table-player";
 import Link from "next/link";
 
@@ -61,12 +63,16 @@ export default function Page() {
           <div className="w-full">
             <Swiper
               slidesPerView={1}
-              // onSlideChange={() => console.log("slide change")}
-              // onSwiper={(swiper) => console.log(swiper)}
+              modules={[Pagination]}
+              pagination={{
+                dynamicBullets: true,
+              }}
             >
               {selectedTickets.map((ticket, index) => (
                 <SwiperSlide key={index}>
-                  <LottoTablePlayer ticket={ticket} />
+                  <div className="mb-8">
+                    <LottoTablePlayer ticket={ticket} />
+                  </div>
                 </SwiperSlide>
               ))}
             </Swiper>
@@ -74,7 +80,12 @@ export default function Page() {
         ) : (
           <div className="flex flex-col items-center gap-2 justify-center px-2 py-4 border shadow-sm w-full rounded-2xl bg-white">
             <p>Bạn có thể thêm vé để vừa gọi số vừa dò</p>
-            <Link href="/lotto/ticket" className="bg-sky-900 text-white font-semibold rounded-full px-2 py-1">Thêm</Link>
+            <Link
+              href="/lotto/ticket"
+              className="bg-sky-900 text-white font-semibold rounded-full px-2 py-1"
+            >
+              Thêm
+            </Link>
           </div>
         )}
         <div className="shadow-sm border rounded-2xl w-full">
@@ -98,8 +109,8 @@ export default function Page() {
           </div>
         </div>
       </div>
-      <div className="fixed bottom-0 z-40 bg-white inset-x-0 flex justify-center">
-        <div className="max-w-md w-full px-2 py-4 border rounded-t-2xl flex justify-center">
+      <div className="fixed bottom-0 z-40 h-16 bg-white inset-x-0 flex justify-center">
+        <div className="max-w-md w-full px-2 h-full items-center  border rounded-t-2xl flex justify-center">
           <button
             onClick={handleClick}
             className="px-4 h-12 w-24 flex font-medium items-center justify-center rounded-2xl bg-sky-900 text-white border shadow-sm"

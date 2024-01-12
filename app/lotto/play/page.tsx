@@ -3,6 +3,8 @@ import TicketContext from "@/context/TicketContext";
 import React, { useContext } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
+import { Pagination } from "swiper/modules";
+import "swiper/css/pagination";
 import Link from "next/link";
 import LottoTablePlayer from "@/components/ticket/lotto-table-player";
 
@@ -31,12 +33,15 @@ export default function Page() {
       ></div>
       <Swiper
         slidesPerView={1}
-        // onSlideChange={() => console.log("slide change")}
-        // onSwiper={(swiper) => console.log(swiper)}
+        modules={[Pagination]}
+        pagination={{
+          dynamicBullets: true,
+        }}
+
       >
         {selectedTickets.map((ticket, index) => (
           <SwiperSlide key={index}>
-            <div className="p-2">
+            <div className="p-2 mb-8">
               <LottoTablePlayer ticket={ticket} />
             </div>
           </SwiperSlide>

@@ -2,18 +2,12 @@
 
 import { lottoMap } from "@/lib/lottoMap";
 import { useContext, useEffect, useState } from "react";
-import { tv } from "tailwind-variants";
 import SelectTicket from "@/components/ticket/select-ticket";
 import LottoContext from "@/context/LottoContext";
 import TicketContext from "@/context/TicketContext";
-import { colorBase } from "@/lib/schemeColor";
 import LottoTablePlayer from "@/components/ticket/lotto-table-player";
 import PlayButton from "@/components/ticket/play-button";
-
-const ticketButton = tv({
-  extend: colorBase,
-  base: "text-white py-2 px-4 rounded-full shadow-sm font-semibold disabled:opacity-50 disabled:cursor-not-allowed transition",
-});
+import Button from "@/components/ui/button";
 
 export default function Page() {
   const [currentLotto] = useContext(LottoContext);
@@ -65,15 +59,15 @@ export default function Page() {
       </nav>
       <LottoTablePlayer ticket={ticket} />
       <div className="mt-4 flex gap-4">
-        <button
+        <Button
           disabled={selectedTickets.some((t) => t.id === ticket.id)}
-          className={ticketButton({ color: ticket.color })}
+          color={ticket.color}
           onClick={handleSelectTicket}
         >
           {selectedTickets.some((t) => t.id === ticket.id)
             ? "Đã chọn"
             : "Chọn vé"}
-        </button>
+        </Button>
         <PlayButton />
       </div>
     </div>

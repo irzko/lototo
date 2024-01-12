@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+* {
+  --swiper-pagination-color: rgb(12, 74, 110);
+}
+
 body {
   -webkit-tap-highlight-color: transparent;
 }
