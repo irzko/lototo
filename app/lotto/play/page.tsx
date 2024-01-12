@@ -15,9 +15,9 @@ export default function Page() {
     return (
       <div>
         <div className="fixed inset-0 flex justify-center items-center">
-          <div className="flex justify-center flex-col items-center">
+          <div className="flex justify-center flex-col gap-2 items-center">
             <p>Chưa có vé nào</p>
-            <Link className="border py-2 px-4 rounded-lg" href="/lotto/ticket">
+            <Link className="border font-semibold shadow-sm py-2 px-4 rounded-full" href="/lotto/ticket">
               Chọn vé
             </Link>
           </div>

@@ -6,8 +6,8 @@ import SelectTicket from "@/components/ticket/select-ticket";
 import LottoContext from "@/context/LottoContext";
 import TicketContext from "@/context/TicketContext";
 import LottoTablePlayer from "@/components/ticket/lotto-table-player";
-import PlayButton from "@/components/ticket/play-button";
 import Button from "@/components/ui/button";
+import Link from "next/link";
 
 export default function Page() {
   const [currentLotto] = useContext(LottoContext);
@@ -68,7 +68,12 @@ export default function Page() {
             ? "Đã chọn"
             : "Chọn vé"}
         </Button>
-        <PlayButton />
+        <Link
+          href="/lotto/play"
+          className="rounded-full text-sky-900 font-semibold shadow-sm border px-4 py-2"
+        >
+          Bắt đầu
+        </Link>
       </div>
     </div>
   );

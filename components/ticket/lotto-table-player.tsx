@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import NumberBox from "./number-box";
 import { colorBase } from "@/lib/schemeColor";
 import { tv } from "tailwind-variants";
+import Button from "../ui/button";
 
 const ticketButton = tv({
   extend: colorBase,
@@ -45,8 +46,9 @@ export default function LottoTablePlayer({ ticket }: { ticket: Ticket }) {
     <div className="w-full flex flex-col items-center ">
       <div className="max-w-md w-full space-y-4">
         <div className="flex w-full justify-end">
-          <button
-            className={ticketButton({ color: ticket.color })}
+          <Button
+          color={ticket.color}
+            className="py-1 px-2"
             onClick={() => {
               const newBoardState = Array.from({ length: 9 }, () =>
                 Array(9).fill(-1)
@@ -62,7 +64,7 @@ export default function LottoTablePlayer({ ticket }: { ticket: Ticket }) {
             }}
           >
             Đặt lại
-          </button>
+          </Button>
         </div>
         <div className="grid grid-cols-9 gap-1">
           {ticket.map.map((line, i) =>

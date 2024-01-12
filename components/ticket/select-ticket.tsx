@@ -1,25 +1,13 @@
 "use client";
 import LottoContext from "@/context/LottoContext";
+import { colorBase } from "@/lib/schemeColor";
 import React, { memo, useContext } from "react";
 import { tv } from "tailwind-variants";
 
-const colorButtonBase = tv({
-  variants: {
-    color: {
-      blue: "bg-blue-300",
-      red: "bg-red-300",
-      green: "bg-green-300",
-      yellow: "bg-yellow-300",
-      pink: "bg-pink-300",
-      purple: "bg-purple-300",
-      orange: "bg-orange-300",
-      lime: "bg-lime-300",
-    },
-  },
-});
+
 
 const colorItem = tv({
-  extend: colorButtonBase,
+  extend: colorBase,
   base: "w-5 h-5 flex justify-center items-center rounded-full peer-checked:border-2 peer-checked:border-gray-900 peer-checked:w-8 peer-checked:h-8 transition",
 });
 
@@ -63,7 +51,7 @@ const TabType = ({
       />
       <label
         htmlFor={id}
-        className="w-full h-8 items-center flex justify-center rounded-lg peer-checked:bg-white peer-checked:shadow-sm"
+        className="w-full h-8 items-center font-semibold flex justify-center rounded-lg peer-checked:bg-white peer-checked:shadow-sm"
       >
         {title}
       </label>
