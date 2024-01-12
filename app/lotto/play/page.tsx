@@ -17,7 +17,10 @@ export default function Page() {
         <div className="fixed inset-0 flex justify-center items-center">
           <div className="flex justify-center flex-col gap-2 items-center">
             <p>Chưa có vé nào</p>
-            <Link className="border font-semibold shadow-sm py-2 px-4 rounded-full" href="/lotto/ticket">
+            <Link
+              className="border font-semibold shadow-sm py-2 px-4 rounded-full"
+              href="/lotto/ticket"
+            >
               Chọn vé
             </Link>
           </div>
@@ -27,26 +30,25 @@ export default function Page() {
   }
 
   return (
-    <div>
-      <div
-        className={`w-full p-2 flex flex-col justify-center space-y-4 items-center`}
-      ></div>
-      <Swiper
-        slidesPerView={1}
-        modules={[Pagination]}
-        pagination={{
-          dynamicBullets: true,
-        }}
-
-      >
-        {selectedTickets.map((ticket, index) => (
-          <SwiperSlide key={index}>
-            <div className="p-2 mb-8">
-              <LottoTablePlayer ticket={ticket} />
-            </div>
-          </SwiperSlide>
-        ))}
-      </Swiper>
+    <div className="flex flex-col items-center">
+      <div className="max-w-md w-full p-2">
+        <Swiper
+          slidesPerView={1}
+          modules={[Pagination]}
+          spaceBetween={16}
+          pagination={{
+            dynamicBullets: true,
+          }}
+        >
+          {selectedTickets.map((ticket, index) => (
+            <SwiperSlide key={index}>
+              <div className="mb-8">
+                <LottoTablePlayer ticket={ticket} />
+              </div>
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      </div>
     </div>
   );
 }

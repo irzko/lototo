@@ -67,6 +67,7 @@ export default function Page() {
             <div className="w-full">
               <Swiper
                 slidesPerView={1}
+                spaceBetween={16}
                 modules={[Pagination]}
                 pagination={{
                   dynamicBullets: true,
