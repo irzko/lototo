@@ -62,58 +62,60 @@ export default function Page() {
             <h1 className="text-9xl font-black text-sky-900">{value}</h1>
           </div>
         </div>
-        <div className="shadow-sm border rounded-2xl w-full">
-          <div className="flex justify-between items-center border-b p-2">
-            <h3 className="font-semibold text-sky-900">Kết quả</h3>
-            <button
-              onClick={handleReset}
-              className="bg-sky-900 text-white font-semibold rounded-full px-2 py-1"
-            >
-              Đặt lại
-            </button>
-          </div>
-          <div className="grid grid-cols-10 p-2 w-full gap-0.5">
-            {Array.from({ length: 90 }, (_, i) => i + 1).map((number) => (
-              <CellResult
-                key={number}
-                value={number}
-                isChecked={result.includes(number)}
-              />
-            ))}
-          </div>
-        </div>
-        <hr className="h-[1px] w-full" />
-        <div className="p-2 w-full">
-          {selectedTickets.length > 0 ? (
-            <div className="w-full">
-              <Swiper
-                slidesPerView={1}
-                spaceBetween={16}
-                modules={[Pagination]}
-                pagination={{
-                  dynamicBullets: true,
-                }}
-              >
-                {selectedTickets.map((ticket, index) => (
-                  <SwiperSlide key={index}>
-                    <div className="mb-8">
-                      <LottoTablePlayer ticket={ticket} />
-                    </div>
-                  </SwiperSlide>
-                ))}
-              </Swiper>
-            </div>
-          ) : (
-            <div className="flex flex-col items-center gap-2 justify-center px-2 py-4 border shadow-sm w-full rounded-2xl bg-white">
-              <p>Bạn có thể thêm vé để vừa gọi số vừa dò</p>
-              <Link
-                href="/lotto/ticket"
+        <div className="px-2 flex flex-col w-full gap-2">
+          <div className="shadow-sm border rounded-2xl w-full">
+            <div className="flex justify-between items-center border-b p-2">
+              <h3 className="font-semibold text-sky-900">Kết quả</h3>
+              <button
+                onClick={handleReset}
                 className="bg-sky-900 text-white font-semibold rounded-full px-2 py-1"
               >
-                Thêm
-              </Link>
+                Đặt lại
+              </button>
             </div>
-          )}
+            <div className="grid grid-cols-10 p-2 w-full gap-0.5">
+              {Array.from({ length: 90 }, (_, i) => i + 1).map((number) => (
+                <CellResult
+                  key={number}
+                  value={number}
+                  isChecked={result.includes(number)}
+                />
+              ))}
+            </div>
+          </div>
+          <hr className="h-[1px] w-full" />
+          <div className="p-2 w-full">
+            {selectedTickets.length > 0 ? (
+              <div className="w-full">
+                <Swiper
+                  slidesPerView={1}
+                  spaceBetween={16}
+                  modules={[Pagination]}
+                  pagination={{
+                    dynamicBullets: true,
+                  }}
+                >
+                  {selectedTickets.map((ticket, index) => (
+                    <SwiperSlide key={index}>
+                      <div className="mb-8">
+                        <LottoTablePlayer ticket={ticket} />
+                      </div>
+                    </SwiperSlide>
+                  ))}
+                </Swiper>
+              </div>
+            ) : (
+              <div className="flex flex-col items-center gap-2 justify-center px-2 py-4 border shadow-sm w-full rounded-2xl bg-white">
+                <p>Bạn có thể thêm vé để vừa gọi số vừa dò</p>
+                <Link
+                  href="/lotto/ticket"
+                  className="bg-sky-900 text-white font-semibold rounded-full px-2 py-1"
+                >
+                  Thêm
+                </Link>
+              </div>
+            )}
+          </div>
         </div>
       </div>
       <div className="fixed bottom-0 z-40 h-16 bg-white inset-x-0 flex justify-center">
