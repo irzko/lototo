@@ -11,13 +11,15 @@ export default function Button({
   children,
   className,
   color,
+  buttonRef,
   ...props
 }: {
   children: React.ReactNode;
   color?: TicketColor;
+  buttonRef?: React.Ref<HTMLButtonElement>;
 } & React.ButtonHTMLAttributes<HTMLButtonElement>) {
   return (
-    <button {...props} className={button({ color, className })}>
+    <button {...props} ref={buttonRef} className={button({ color, className })}>
       {children}
     </button>
   );

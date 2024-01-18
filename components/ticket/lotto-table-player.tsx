@@ -1,21 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import NumberBox from "./number-box";
-import { colorBase } from "@/lib/schemeColor";
-import { tv } from "tailwind-variants";
 import Button from "../ui/button";
+import findTicketById from "@/lib/findTicketById";
 
-const ticketButton = tv({
-  extend: colorBase,
-  base: "text-white py-1 px-2 rounded-full font-semibold shadow-sm disabled:opacity-50 disabled:cursor-not-allowed transition",
-});
-
-export default function LottoTablePlayer({ ticket }: { ticket: Ticket }) {
+export default function LottoTablePlayer({ ticketId }: { ticketId: number }) {
   const [boardState, setBoardState] = useState<number[][]>([]);
+  const ticket = useMemo(() => {
+    return findTicketById(ticketId);
+  }, [ticketId]);
   useEffect(() => {
     const newBoardState: number[][] = Array.from({ length: 9 }, () =>
       Array(9).fill(-1)
     );
-    ticket.map.forEach((sheet, i) => {
+    ticket!.map.forEach((sheet, i) => {
       sheet.forEach((cell, j) => {
         if (cell !== "") {
           newBoardState[i][j] = 0;
@@ -36,7 +33,7 @@ export default function LottoTablePlayer({ ticket }: { ticket: Ticket }) {
 
   if (boardState.length === 0) {
     return (
-      <div className="fixed inset-0 font-medium flex justify-center items-center">
+      <div className="fixed inset-0 font-semibold text-sky-900 flex justify-center items-center">
         Đang tải...
       </div>
     );
@@ -47,13 +44,13 @@ export default function LottoTablePlayer({ ticket }: { ticket: Ticket }) {
       <div className="max-w-md w-full space-y-4">
         <div className="flex w-full justify-end">
           <Button
-          color={ticket.color}
+            color={ticket!.color}
             className="py-1 px-2"
             onClick={() => {
               const newBoardState = Array.from({ length: 9 }, () =>
                 Array(9).fill(-1)
               );
-              ticket.map.forEach((sheet, i) => {
+              ticket!.map.forEach((sheet, i) => {
                 sheet.forEach((cell, j) => {
                   if (cell !== "") {
                     newBoardState[i][j] = 0;
@@ -67,15 +64,15 @@ export default function LottoTablePlayer({ ticket }: { ticket: Ticket }) {
           </Button>
         </div>
         <div className="grid grid-cols-9 gap-1">
-          {ticket.map.map((line, i) =>
+          {ticket!.map.map((line, i) =>
             line.map((cell, j) => (
               <NumberBox
                 onChange={() => handleChange(i, j)}
                 key={i + "" + j}
-                id={`number-box-${ticket.id}_${i}_${j}`}
+                id={`number-box-${ticket!.id}_${i}_${j}`}
                 title={cell}
                 value={boardState[i][j]}
-                color={ticket.color}
+                color={ticket!.color}
               />
             ))
           )}

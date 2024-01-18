@@ -1,17 +1,29 @@
 "use client";
-import TicketContext from "@/context/TicketContext";
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import { Pagination } from "swiper/modules";
 import "swiper/css/pagination";
 import Link from "next/link";
 import LottoTablePlayer from "@/components/ticket/lotto-table-player";
+import PlayerContext from "@/context/PlayerContext";
+import io from "socket.io-client";
+import type { Socket } from "socket.io-client";
+let socket: undefined | Socket;
 
 export default function Page() {
-  const [selectedTickets] = useContext(TicketContext);
+  const [player] = useContext(PlayerContext);
+  useEffect(() => {
+    fetch("/api/socket");
+    socket = io();
+    socket.on("connect", () => {
+      console.log("connected");
+    });
 
-  if (selectedTickets.length === 0) {
+    socket.emit("join", player);
+  }, [player]);
+
+  if (player.tickets.length === 0) {
     return (
       <div>
         <div className="fixed inset-0 flex justify-center items-center">
@@ -40,10 +52,10 @@ export default function Page() {
             dynamicBullets: true,
           }}
         >
-          {selectedTickets.map((ticket, index) => (
-            <SwiperSlide key={index}>
+          {player.tickets.map((ticketId) => (
+            <SwiperSlide key={ticketId}>
               <div className="mb-8">
-                <LottoTablePlayer ticket={ticket} />
+                <LottoTablePlayer ticketId={ticketId} />
               </div>
             </SwiperSlide>
           ))}

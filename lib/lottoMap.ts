@@ -1,4 +1,4 @@
-export const lottoMap: Ticket[] = [
+export const lottoTickets: Ticket[] = [
   {
     id: 1,
     color: "pink",

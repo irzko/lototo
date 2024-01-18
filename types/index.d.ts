@@ -16,3 +16,8 @@ type Ticket = {
   color: TicketColor;
   map: string[][];
 };
+
+interface Player {
+  name: string;
+  tickets: number[];
+}

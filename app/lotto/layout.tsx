@@ -1,21 +1,25 @@
-import { Metadata } from "next";
 import React from "react";
-import Providers from "../providers";
 import MyTicketButton from "@/components/my-ticket/my-ticket-button";
 import NavBar from "@/components/navbar";
-
+import NavbarBrand from "@/components/navbar/navbar-brand";
+import Logo from "@/components/logo";
+import NavbarContent from "@/components/navbar/navbar-content";
+import NavbarItem from "@/components/navbar/navbar-item";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <Providers>
+    <>
       <NavBar>
-        <ul className="flex justify-center items-center h-full gap-4">
-          <li>
+        <NavbarBrand>
+          <Logo />
+        </NavbarBrand>
+        <NavbarContent>
+          <NavbarItem>
             <MyTicketButton />
-          </li>
-        </ul>
+          </NavbarItem>
+        </NavbarContent>
       </NavBar>
       <main className="mt-16">{children}</main>
-    </Providers>
+    </>
   );
 }
