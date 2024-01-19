@@ -24,7 +24,19 @@ export default function Page() {
     <div className="flex justify-center">
       <div className="max-w-md p-2 space-y-4 flex flex-col w-full">
         <div className="flex flex-col space-y-2 bg-white border shadow-sm rounded-2xl p-2">
-          <h2 className="text-sky-900 font-semibold">Vé của bạn</h2>
+          <div className="flex items-center justify-between">
+            <h2 className="text-sky-900 font-semibold">Vé của bạn</h2>
+            {player.tickets.length < 2 ? (
+              <Link
+                href="/lotto/ticket"
+                className="bg-sky-900 text-white font-semibold rounded-full px-2 py-1"
+              >
+                Thêm
+              </Link>
+            ) : (
+              <span></span>
+            )}
+          </div>
           <hr />
           {player.tickets.length > 0 ? (
             <ul className="space-y-2">
@@ -48,7 +60,7 @@ export default function Page() {
                       </h4>
                     </div>
                     <button
-                      className="text-rose-600"
+                      className="text-sky-900"
                       onClick={() => handleDeleteTicket(ticketId)}
                     >
                       <svg
@@ -73,16 +85,9 @@ export default function Page() {
           ) : (
             <div className="flex flex-col gap-2 items-center p-2">
               <p className="text-gray-900">Bạn chưa có vé nào</p>
-              <Link
-                href="/lotto/ticket"
-                className="rounded-full text-sky-900 font-semibold shadow-sm border px-2 py-1"
-              >
-                Chọn vé
-              </Link>
             </div>
           )}
         </div>
-
         <div className="flex justify-center gap-2">
           <Link
             href="/lotto/host"

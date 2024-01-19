@@ -34,36 +34,6 @@ const TabContext = React.createContext<
   [number, React.Dispatch<React.SetStateAction<number>>]
 >([1, () => {}]);
 
-const Tab = ({
-  id,
-  title,
-  value,
-}: {
-  id?: string;
-  value: number;
-  title: string;
-}) => {
-  const [currentTab, setCurrentTab] = useContext(TabContext);
-  return (
-    <div className="flex justify-center w-full">
-      <input
-        name="type"
-        type="radio"
-        className="hidden peer"
-        id={id}
-        onChange={() => setCurrentTab(value)}
-        checked={value === currentTab}
-      />
-      <label
-        htmlFor={id}
-        className="w-full h-8 items-center font-semibold flex justify-center rounded-lg peer-checked:bg-white peer-checked:shadow-sm"
-      >
-        {title}
-      </label>
-    </div>
-  );
-};
-
 const ResultTable = memo(function ResultTable({
   result,
   handleReset,
@@ -72,8 +42,8 @@ const ResultTable = memo(function ResultTable({
   handleReset: () => void;
 }) {
   return (
-    <div className="shadow-sm border rounded-2xl w-full">
-      <div className="flex justify-between items-center border-b p-2">
+    <div className="shadow-sm border rounded-2xl w-full space-y-2 p-2">
+      <div className="flex justify-between items-center">
         <h3 className="font-semibold text-sky-900">Kết quả</h3>
         <button
           onClick={handleReset}
@@ -82,7 +52,8 @@ const ResultTable = memo(function ResultTable({
           Đặt lại
         </button>
       </div>
-      <div className="grid grid-cols-10 p-2 w-full gap-0.5">
+      <hr />
+      <div className="grid grid-cols-10 w-full gap-0.5">
         {Array.from({ length: 90 }, (_, i) => i + 1).map((number) => (
           <CellResult
             key={number}
@@ -176,30 +147,19 @@ export default function Page() {
     setValue(0);
   }, []);
 
-  const page = React.useMemo(() => {
-    return [
-      <ResultTable key={0} result={result} handleReset={handleReset} />,
-      <TicketTable key={1} />,
-    ];
-  }, [handleReset, result]);
-
   return (
     <TabContext.Provider value={[currentTab, setCurrentTab]}>
       <div className="flex justify-center">
         <div className="max-w-md flex flex-col items-center space-y-2 w-full mb-20">
           <div className="p-2 w-full sticky space-y-2 z-40 border-b shadow-sm top-16 bg-white">
             <div className="rounded-2xl flex justify-center items-center border">
-              <h1 className="text-8xl font-black text-sky-900">{value}</h1>
-            </div>
-
-            <div className="flex justify-between w-full bg-gray-200 rounded-lg p-0.5">
-              <Tab title="Kết quả" id="result-tab" value={0} />
-              <Tab title="Vé của bạn" id="my-ticket-tab" value={1} />
+              <h1 className="text-9xl font-black text-sky-900">{value}</h1>
             </div>
           </div>
-
           <div className="px-2 flex flex-col w-full gap-2">
-            {page[currentTab]}
+            <ResultTable key={0} result={result} handleReset={handleReset} />
+            <hr />
+            <TicketTable key={1} />
           </div>
         </div>
         <GetNumberButton handleClick={handleClick} />

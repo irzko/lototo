@@ -1,7 +1,7 @@
 "use client";
 
 import { lottoTickets } from "@/lib/lottoMap";
-import { useContext, useEffect, useMemo, useState } from "react";
+import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import SelectTicket from "@/components/ticket/select-ticket";
 import LottoContext from "@/context/LottoContext";
 import LottoTablePlayer from "@/components/ticket/lotto-table-player";
@@ -10,7 +10,13 @@ import PlayerContext from "@/context/PlayerContext";
 import useModal from "@/hooks/useModal";
 
 export default function Page() {
-  const [currentLotto] = useContext(LottoContext);
+  const [currentLotto, setCurrentLotto] = useState<{
+    color: TicketColor;
+    type: TicketType;
+  }>({
+    color: "pink",
+    type: "1",
+  });
   const [ticket, setTicket] = useState<Ticket>({} as Ticket);
   const [player, setPlayer] = useContext(PlayerContext);
   const [modal, showModal] = useModal();
@@ -80,7 +86,7 @@ export default function Page() {
   };
 
   return (
-    <>
+    <LottoContext.Provider value={[currentLotto, setCurrentLotto]}>
       <div
         className={`w-full p-2 flex flex-col justify-center space-y-4 items-center`}
       >
@@ -102,6 +108,6 @@ export default function Page() {
         </div>
       </div>
       {modal}
-    </>
+    </LottoContext.Provider>
   );
 }
