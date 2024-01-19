@@ -7,21 +7,10 @@ import "swiper/css/pagination";
 import Link from "next/link";
 import LottoTablePlayer from "@/components/ticket/lotto-table-player";
 import PlayerContext from "@/context/PlayerContext";
-import io from "socket.io-client";
-import type { Socket } from "socket.io-client";
-let socket: undefined | Socket;
+import findTicketById from "@/lib/findTicketById";
 
 export default function Page() {
   const [player] = useContext(PlayerContext);
-  useEffect(() => {
-    fetch("/api/socket");
-    socket = io();
-    socket.on("connect", () => {
-      console.log("connected");
-    });
-
-    socket.emit("join", player);
-  }, [player]);
 
   if (player.tickets.length === 0) {
     return (
@@ -55,7 +44,7 @@ export default function Page() {
           {player.tickets.map((ticketId) => (
             <SwiperSlide key={ticketId}>
               <div className="mb-8">
-                <LottoTablePlayer ticketId={ticketId} />
+                <LottoTablePlayer ticket={findTicketById(ticketId)!} />
               </div>
             </SwiperSlide>
           ))}

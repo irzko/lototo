@@ -4,8 +4,6 @@ import { colorBase } from "@/lib/schemeColor";
 import React, { memo, useContext } from "react";
 import { tv } from "tailwind-variants";
 
-
-
 const colorItem = tv({
   extend: colorBase,
   base: "w-5 h-5 flex justify-center items-center rounded-full peer-checked:border-2 peer-checked:border-gray-900 peer-checked:w-8 peer-checked:h-8 transition",

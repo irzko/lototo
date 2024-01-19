@@ -1,13 +1,9 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useState } from "react";
 import NumberBox from "./number-box";
 import Button from "../ui/button";
-import findTicketById from "@/lib/findTicketById";
 
-export default function LottoTablePlayer({ ticketId }: { ticketId: number }) {
+export default function LottoTablePlayer({ ticket }: { ticket: Ticket }) {
   const [boardState, setBoardState] = useState<number[][]>([]);
-  const ticket = useMemo(() => {
-    return findTicketById(ticketId);
-  }, [ticketId]);
   useEffect(() => {
     const newBoardState: number[][] = Array.from({ length: 9 }, () =>
       Array(9).fill(-1)

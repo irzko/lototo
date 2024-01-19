@@ -10,9 +10,7 @@ import LottoTablePlayer from "@/components/ticket/lotto-table-player";
 import Link from "next/link";
 import Button from "@/components/ui/button";
 import PlayerContext from "@/context/PlayerContext";
-import io from "socket.io-client";
-import type { Socket } from "socket.io-client";
-let socket: undefined | Socket;
+import findTicketById from "@/lib/findTicketById";
 
 const CellResult = ({
   value,
@@ -45,7 +43,6 @@ const Tab = ({
   value: number;
   title: string;
 }) => {
-  // const [currentLotto, setCurrentLotto] = useContext(LottoContext);
   const [currentTab, setCurrentTab] = useContext(TabContext);
   return (
     <div className="flex justify-center w-full">
@@ -132,7 +129,7 @@ const TicketTable = memo(function TicketTable() {
             {player.tickets.map((ticketId) => (
               <SwiperSlide key={ticketId}>
                 <div className="mb-8">
-                  <LottoTablePlayer ticketId={ticketId} />
+                  <LottoTablePlayer ticket={findTicketById(ticketId)!} />
                 </div>
               </SwiperSlide>
             ))}
@@ -153,79 +150,14 @@ const TicketTable = memo(function TicketTable() {
   );
 });
 
-const ListFriend = memo(function ListFriend({ player }: { player: Player[] }) {
-  return (
-    <div>
-      {player.length > 0 ? (
-        <ul className="flex flex-col p-2 border shadow-sm rounded-2xl space-y-2">
-          <h2 className="font-semibold text-sky-900">Người chơi đang tham gia</h2>
-          <hr />
-          {player.map((p, index) => (
-            <li
-              className="py-2 flex items-center gap-2 px-4 border shadow-sm rounded-2xl"
-              key={index}
-            >
-              <div className="text-sky-900">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                  className="w-12 h-12"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M18.685 19.097A9.723 9.723 0 0 0 21.75 12c0-5.385-4.365-9.75-9.75-9.75S2.25 6.615 2.25 12a9.723 9.723 0 0 0 3.065 7.097A9.716 9.716 0 0 0 12 21.75a9.716 9.716 0 0 0 6.685-2.653Zm-12.54-1.285A7.486 7.486 0 0 1 12 15a7.486 7.486 0 0 1 5.855 2.812A8.224 8.224 0 0 1 12 20.25a8.224 8.224 0 0 1-5.855-2.438ZM15.75 9a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-              </div>
-
-              <div>
-                <p className="font-semibold text-sky-900">{p.name}</p>
-                <p>{p.tickets.length} vé</p>
-              </div>
-            </li>
-          ))}
-        </ul>
-      ) : (
-        <div className="h-80 flex flex-col justify-center items-center">
-          <p className="text-sky-900 font-semibold">Chưa có ai tham gia</p>
-          <p className="text-gray-400">Hãy mời bạn bè của bạn để cùng chơi</p>
-        </div>
-      )}
-    </div>
-  );
-});
-
 export default function Page() {
   const [arrayNumber, setArrayNumber] = React.useState(
     arrayShuffle(Array.from({ length: 90 }, (_, i) => i + 1))
   );
   const [result, setResult] = React.useState<number[]>([]);
   const [value, setValue] = React.useState(0);
-  const [friend, setFriend] = React.useState<Player[]>([]);
 
   const [currentTab, setCurrentTab] = React.useState<number>(0);
-
-  useEffect(() => {
-    fetch("/api/socket");
-    socket = io();
-
-    // socket.on("connect", () => {
-    //   console.log("connected");
-    // });
-
-    function playerJoin(data: Player) {
-      setFriend((prev) => {
-        if (prev.find((p) => p.name === data.name)) {
-          return prev;
-        }
-        return [...prev, data];
-      });
-    }
-
-    socket.on("join", playerJoin);
-  }, [friend]);
 
   const handleClick = useCallback(() => {
     if (arrayNumber.length > 0) {
@@ -247,10 +179,9 @@ export default function Page() {
   const page = React.useMemo(() => {
     return [
       <ResultTable key={0} result={result} handleReset={handleReset} />,
-      <ListFriend key={1} player={friend} />,
-      <TicketTable key={2} />,
+      <TicketTable key={1} />,
     ];
-  }, [friend, handleReset, result]);
+  }, [handleReset, result]);
 
   return (
     <TabContext.Provider value={[currentTab, setCurrentTab]}>
@@ -262,9 +193,8 @@ export default function Page() {
             </div>
 
             <div className="flex justify-between w-full bg-gray-200 rounded-lg p-0.5">
-              <Tab title="Kết quả" id="type-1" value={0} />
-              <Tab title={`Bạn bè (${friend.length})`} id="type-2" value={1} />
-              <Tab title="Vé của bạn" id="type-3" value={2} />
+              <Tab title="Kết quả" id="result-tab" value={0} />
+              <Tab title="Vé của bạn" id="my-ticket-tab" value={1} />
             </div>
           </div>
 
