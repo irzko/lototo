@@ -8,9 +8,11 @@ const MyTicketButton = () => {
   return (
     <Link
       href="/lotto/my-ticket"
-      className="rounded-full shadow-sm font-semibold border px-4 py-2"
+      className="bg-orange-500 border-orange-800 flex flex-col h-12 select-none active:pb-0.5 text-white pb-1.5 shadow-md transition-[.2s] overflow-hidden border-2 rounded-xl"
     >
-      Vé của bạn ({player.tickets.length}/2)
+      <div className="bg-orange-400 flex gap-2 px-2 h-full items-center font-semibold justify-center rounded-b-xl">
+        Vé của tôi ({player.tickets.length}/2)
+      </div>
     </Link>
   );
 };

@@ -152,7 +152,7 @@ export default function DropDown({
 }: {
   disabled?: boolean;
   buttonAriaLabel?: string;
-  buttonClassName: string;
+  buttonClassName?: string;
   buttonIconClassName?: string;
   buttonLabel?: string;
   children: ReactNode;

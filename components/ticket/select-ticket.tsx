@@ -6,7 +6,7 @@ import { tv } from "tailwind-variants";
 
 const colorItem = tv({
   extend: colorBase,
-  base: "w-5 h-5 flex justify-center items-center rounded-full peer-checked:border-2 peer-checked:border-gray-900 peer-checked:w-8 peer-checked:h-8 transition",
+  base: "w-5 h-5 flex justify-center items-center rounded-full border-2 border-purple-800 peer-checked:w-8 peer-checked:h-8 transition",
 });
 
 const ColorItem = ({ id, color }: { id?: string; color: TicketColor }) => {
@@ -49,7 +49,7 @@ const TabType = ({
       />
       <label
         htmlFor={id}
-        className="w-full h-8 items-center font-semibold flex justify-center rounded-lg peer-checked:bg-white peer-checked:shadow-sm"
+        className="w-full h-8 items-center font-semibold flex justify-center rounded-md peer-checked:bg-purple-200 peer-checked:shadow-sm"
       >
         {title}
       </label>
@@ -72,16 +72,18 @@ const SelectTicket = () => {
   return (
     <div className="w-full max-w-md justify-center">
       <div
-        className={`flex flex-col shadow-sm w-full bg-white border p-2 rounded-2xl gap-2`}
+        className={`shadow-sm w-full bg-purple-300 border-2 p-1 rounded-2xl border-purple-800`}
       >
-        <div className="flex items-center justify-around gap-2">
-          {colors.map((color) => (
-            <ColorItem key={color} id={color} color={color} />
-          ))}
-        </div>
-        <div className="flex justify-between bg-gray-200 rounded-lg p-0.5">
-          <TabType title="#1" id="type-1" value="1" />
-          <TabType title="#2" id="type-2" value="2" />
+        <div className="bg-purple-200 p-1 rounded-xl flex flex-col gap-2">
+          <div className="flex items-center justify-around gap-2">
+            {colors.map((color) => (
+              <ColorItem key={color} id={color} color={color} />
+            ))}
+          </div>
+          <div className="flex justify-between bg-purple-400 rounded-lg p-0.5">
+            <TabType title="#1" id="type-1" value="1" />
+            <TabType title="#2" id="type-2" value="2" />
+          </div>
         </div>
       </div>
     </div>

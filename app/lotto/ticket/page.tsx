@@ -90,21 +90,22 @@ export default function Page() {
       <div
         className={`w-full p-2 flex flex-col justify-center space-y-4 items-center`}
       >
-        <nav className="flex sticky top-16 w-full justify-center">
+        <nav className="flex sticky top-20 w-full justify-center">
           <SelectTicket />
         </nav>
-        <LottoTablePlayer ticket={ticket} />
-        <div className="mt-4">
-          <Button
-            className={
-              isSelect
-                ? "border shadow-sm text-sky-900"
-                : "bg-sky-900 border shadow-sm"
-            }
-            onClick={isSelect ? handleUnSelectTicket : handleSelectTicket}
-          >
-            {isSelect ? "Hủy chọn" : "Chọn"}
-          </Button>
+        <div className="w-full max-w-md justify-center rounded-2xl p-1 bg-purple-300 border-purple-800 border-2">
+          <div className="w-full bg-purple-200 p-1 rounded-xl">
+            <LottoTablePlayer ticket={ticket} />
+            <div className="mt-4 w-full">
+              <Button
+                fullWidth
+                color={isSelect ? "secondary" : "primary"}
+                onClick={isSelect ? handleUnSelectTicket : handleSelectTicket}
+              >
+                {isSelect ? "Hủy chọn" : "Chọn"}
+              </Button>
+            </div>
+          </div>
         </div>
       </div>
       {modal}

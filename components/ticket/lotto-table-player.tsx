@@ -36,12 +36,12 @@ export default function LottoTablePlayer({ ticket }: { ticket: Ticket }) {
   }
 
   return (
-    <div className="w-full flex flex-col items-center ">
+    <div className="w-full flex flex-col items-center">
       <div className="max-w-md w-full space-y-4">
         <div className="flex w-full justify-end">
           <Button
-            color={ticket!.color}
-            className="py-1 px-2"
+            color="primary"
+            size="sm"
             onClick={() => {
               const newBoardState = Array.from({ length: 9 }, () =>
                 Array(9).fill(-1)

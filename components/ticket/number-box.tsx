@@ -3,20 +3,20 @@ import { tv } from "tailwind-variants";
 
 const numberBox = tv({
   extend: colorBase,
-  base: "inline-flex items-center text-white aspect-square justify-center w-full rounded-lg cursor-pointer  peer-checked:rounded-full transition",
+  base: "inline-flex items-center border-2 aspect-square justify-center w-full rounded-lg cursor-pointer  peer-checked:rounded-full transition",
   variants: {
     color: {
-      blue: "peer-checked:bg-blue-500",
-      red: "peer-checked:bg-red-500",
-      green: "peer-checked:bg-green-500",
-      yellow: "peer-checked:bg-yellow-500",
-      pink: "peer-checked:bg-pink-500",
-      purple: "peer-checked:bg-purple-500",
-      orange: "peer-checked:bg-orange-500",
-      lime: "peer-checked:bg-lime-500",
+      blue: "peer-checked:bg-blue-500 peer-checked:text-blue-100",
+      red: "peer-checked:bg-red-500 peer-checked:text-red-100",
+      green: "peer-checked:bg-green-500 peer-checked:text-green-100",
+      yellow: "peer-checked:bg-yellow-500 peer-checked:text-yellow-100",
+      pink: "peer-checked:bg-pink-500 peer-checked:text-pink-100",
+      purple: "peer-checked:bg-purple-500 peer-checked:text-purple-100",
+      orange: "peer-checked:bg-orange-500 peer-checked:text-orange-100",
+      lime: "peer-checked:bg-lime-500 peer-checked:text-lime-100",
     },
     disabled: {
-      true: "cursor-not-allowed",
+      true: "cursor-not-allowed border-none",
     },
   },
 
