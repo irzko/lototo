@@ -38,7 +38,7 @@ const MenuItem = ({
   );
 };
 
-export function Card({ children }: Readonly<{ children: React.ReactNode }>) {
+function Card({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <div className="rounded-2xl p-1 bg-purple-300 space-y-2 shadow-sm border-2 border-purple-800">
       <div className="bg-purple-200 rounded-xl p-2">{children}</div>
@@ -82,8 +82,11 @@ export default function Page() {
           <Card>
             <h3 className="font-semibold text-purple-800">Menu</h3>
             <ul className="flex flex-col gap-4">
-              <MenuItem
-                icon={
+              <Link
+                href="/lotto/host"
+                className="bg-red-500 border-red-800 h-12 select-none active:pb-0.5 text-white pb-1.5 shadow-md transition-[.2s] overflow-hidden border-2 rounded-xl"
+              >
+                <div className="bg-red-400 flex gap-2 px-2 h-full items-center font-semibold justify-center rounded-b-xl">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
@@ -98,11 +101,10 @@ export default function Page() {
                       d="M3.75 6A2.25 2.25 0 0 1 6 3.75h2.25A2.25 2.25 0 0 1 10.5 6v2.25a2.25 2.25 0 0 1-2.25 2.25H6a2.25 2.25 0 0 1-2.25-2.25V6ZM3.75 15.75A2.25 2.25 0 0 1 6 13.5h2.25a2.25 2.25 0 0 1 2.25 2.25V18a2.25 2.25 0 0 1-2.25 2.25H6A2.25 2.25 0 0 1 3.75 18v-2.25ZM13.5 6a2.25 2.25 0 0 1 2.25-2.25H18A2.25 2.25 0 0 1 20.25 6v2.25A2.25 2.25 0 0 1 18 10.5h-2.25a2.25 2.25 0 0 1-2.25-2.25V6ZM13.5 15.75a2.25 2.25 0 0 1 2.25-2.25H18a2.25 2.25 0 0 1 2.25 2.25V18A2.25 2.25 0 0 1 18 20.25h-2.25A2.25 2.25 0 0 1 13.5 18v-2.25Z"
                     />
                   </svg>
-                }
-                href="/lotto/host"
-              >
-                Gọi số
-              </MenuItem>
+                  Gọi số
+                </div>
+              </Link>
+
               <MenuItem
                 icon={
                   <svg
