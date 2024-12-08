@@ -31,27 +31,24 @@ export default function Page() {
   }
 
   return (
-    <div className="px-2 pt-4">
-      <div className="flex flex-col items-center p-1 rounded-2xl bg-purple-300 border-purple-800 border-2">
-        <div className="max-w-md w-full bg-purple-200 p-1 rounded-xl">
-          <h3 className="text-purple-800 font-bold text-2xl">Dò lô tô</h3>
-          <Swiper
-            slidesPerView={1}
-            modules={[Pagination]}
-            spaceBetween={16}
-            pagination={{
-              dynamicBullets: true,
-            }}
-          >
-            {player.tickets.map((ticketId) => (
-              <SwiperSlide key={ticketId}>
-                <div className="mb-8">
-                  <LottoTablePlayer ticket={findTicketById(ticketId)!} />
-                </div>
-              </SwiperSlide>
-            ))}
-          </Swiper>
-        </div>
+    <div className="flex flex-col items-center">
+      <div className="max-w-md w-full p-2">
+        <Swiper
+          slidesPerView={1}
+          modules={[Pagination]}
+          spaceBetween={16}
+          pagination={{
+            dynamicBullets: true,
+          }}
+        >
+          {player.tickets.map((ticketId) => (
+            <SwiperSlide key={ticketId}>
+              <div className="mb-8">
+                <LottoTablePlayer ticket={findTicketById(ticketId)!} />
+              </div>
+            </SwiperSlide>
+          ))}
+        </Swiper>
       </div>
     </div>
   );

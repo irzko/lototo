@@ -22,7 +22,7 @@ const CellResult = ({
   return (
     <div
       className={`aspect-square font-semibold rounded-full flex justify-center items-center ${
-        isChecked ? "bg-purple-800 text-white" : "text-purple-800"
+        isChecked ? "bg-sky-900 text-white" : "text-gray-400"
       }`}
     >
       {value}
@@ -42,14 +42,17 @@ const ResultTable = memo(function ResultTable({
   handleReset: () => void;
 }) {
   return (
-    <div className="shadow-sm border-2 border-purple-800 bg-purple-200 rounded-2xl w-full space-y-2 p-2">
+    <div className="shadow-sm border rounded-2xl w-full space-y-2 p-2">
       <div className="flex justify-between items-center">
-        <h3 className="font-semibold text-purple-800">Kết quả</h3>
-        <Button onClick={handleReset} size="sm">
+        <h3 className="font-semibold text-sky-900">Kết quả</h3>
+        <button
+          onClick={handleReset}
+          className="bg-sky-900 text-white font-semibold rounded-full px-2 py-1"
+        >
           Đặt lại
-        </Button>
+        </button>
       </div>
-      <hr className="border-purple-800 border-t-2" />
+      <hr />
       <div className="grid grid-cols-10 w-full gap-0.5">
         {Array.from({ length: 90 }, (_, i) => i + 1).map((number) => (
           <CellResult
@@ -69,10 +72,10 @@ const GetNumberButton = memo(function GetNumberButton({
   handleClick: () => void;
 }) {
   return (
-    <div className="fixed bottom-0 z-40 h-16 inset-x-0 flex justify-center">
-      <div className="max-w-md bg-white w-full px-2 h-full items-center flex justify-center">
-        <Button fullWidth onClick={handleClick}>
-          Gọi số
+    <div className="fixed bottom-0 z-40 h-16 bg-white inset-x-0 flex justify-center">
+      <div className="max-w-md w-full px-2 h-full items-center border rounded-t-2xl flex justify-center">
+        <Button className="bg-sky-900 w-32" onClick={handleClick}>
+          Bốc
         </Button>
       </div>
     </div>
@@ -148,11 +151,9 @@ export default function Page() {
     <TabContext.Provider value={[currentTab, setCurrentTab]}>
       <div className="flex justify-center">
         <div className="max-w-md flex flex-col items-center space-y-2 w-full mb-20">
-          <div className="p-2 pt-4 w-full sticky space-y-2 z-40 top-16">
-            <div className="rounded-2xl bg-purple-300 p-1 overflow-hidden flex justify-center items-center border-2 border-purple-800">
-              <div className="bg-purple-200 flex py-2 w-full rounded-xl h-full justify-center rounded-b-xl">
-                <h1 className="text-9xl font-black text-purple-800">{value}</h1>
-              </div>
+          <div className="p-2 w-full sticky space-y-2 z-40 border-b shadow-sm top-16 bg-white">
+            <div className="rounded-2xl flex justify-center items-center border">
+              <h1 className="text-9xl font-black text-sky-900">{value}</h1>
             </div>
           </div>
           <div className="px-2 flex flex-col w-full gap-2">
